@@ -20,46 +20,49 @@ public class CodingUtils {
                 return 0;
         }
     }
-    public static String genCelyPriklad(int difficulty){
+
+    public static String genCelyPriklad(int difficulty) {
         Random rand = new Random();
-        int num1 =0;
-        int num2 =0;
-        int znaminkor = rand.nextInt(4)+1;
-        String znaminko ="";
-        switch (znaminkor){
-            case 1-> znaminko = "+";
-            case 2-> znaminko = "-";
-            case 3-> znaminko = "*";
-            case 4-> znaminko = "/";
+        int num1 = 0;
+        int num2 = 0;
+        int znaminkoRand = rand.nextInt(4) + 1;
+        String znaminko = "";
+        switch (znaminkoRand) {
+            case 1 -> znaminko = "+";
+            case 2 -> znaminko = "-";
+            case 3 -> znaminko = "*";
+            case 4 -> znaminko = "/";
         }
-        switch(difficulty){
-            case 1->{
-                if (znaminkor == 4){
-                    num1 = rand.nextInt(21)-10;
-                    num2 = num1* rand.nextInt(3)+1;
-                }
+        switch (difficulty) {
+            case 1 -> {
+                if (znaminkoRand == 4) {
+                    num1 = rand.nextInt(21) - 10;
+                    num2 = num1 * rand.nextInt(3) + 1;
+                } else {
 
-                num1 = rand.nextInt(21)-10;
-                num2 = rand.nextInt(21)-10;
-            }
-            case 2-> {
-                if (znaminkor == 4){
-                    num1 = rand.nextInt(201)-100;
-                    num2 = num1* rand.nextInt(3)+1;
+                    num1 = rand.nextInt(21) - 10;
+                    num2 = rand.nextInt(21) - 10;
                 }
-                num1 = rand.nextInt(201) - 100;
-                num2 = rand.nextInt(201) - 100;
             }
-            case 3-> {
-                if (znaminkor == 4){
-                    num1 = rand.nextInt(2001)-1000;
-                    num2 = num1* rand.nextInt(3)+1;
-                    return num1 + " " + znaminko + " " + num2;
+            case 2 -> {
+                if (znaminkoRand == 4) {
+                    num1 = rand.nextInt(201) - 100;
+                    num2 = num1 * rand.nextInt(3) + 1;
+                } else {
+                    num1 = rand.nextInt(201) - 100;
+                    num2 = rand.nextInt(201) - 100;
                 }
-                num1 = rand.nextInt(2001) - 1000;
-                num2 = rand.nextInt(2001) - 1000;
+            }
+            case 3 -> {
+                if (znaminkoRand == 4) {
+                    num1 = rand.nextInt(2001) - 1000;
+                    num2 = num1 * (rand.nextInt(3)+1 );
+                } else {
+                    num1 = rand.nextInt(2001) - 1000;
+                    num2 = rand.nextInt(2001) - 1000;
+                }
             }
         }
-
+        return num2 + " " + znaminko + " " + num1;
     }
 }
