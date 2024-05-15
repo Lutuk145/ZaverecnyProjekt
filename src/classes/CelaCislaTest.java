@@ -2,7 +2,10 @@ package classes;
 
 import utils.CodingUtils;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import static utils.CodingUtils.wrongGuesses;
 
 public class CelaCislaTest
 {
@@ -22,15 +25,32 @@ public class CelaCislaTest
         return priklady;
     }
     public void test(){
+
         int spravne = 0;
         String[] priklady = genPriklady();
-        Scanner scanner = new Scanner(System.in);
+
         for (String priklad : priklady) {
-            System.out.print(priklad+" = ");
-            int vysledek = scanner.nextInt();
-            System.out.println(CodingUtils.vysledekCelychCisel(priklad) == vysledek);
+            if (wrongGuesses <=0){
+                System.out.println("Zadal jsi 5 neplatnych odpovedi, test ukoncen");
+                System.exit(0);
+            }
+            System.out.print(priklad + " = ");
+            Scanner scanner = new Scanner(System.in);
+            try {
+                int vysledek = scanner.nextInt();
+                System.out.println(CodingUtils.vysledekCelychCisel(priklad) == vysledek);
+                spravne += CodingUtils.vysledekCelychCisel(priklad) == vysledek ? 1 : 0;
+            } catch (InputMismatchException e) {
+                wrongGuesses--;
+                System.out.printf("Neplatny vstup %d/5\n", wrongGuesses);
+                scanner.next();
+            }
+
         }
+
+
         System.out.println("Mas "+spravne+"/"+ pocet + " spravnych odpovedi");
+
     }
 
 }
