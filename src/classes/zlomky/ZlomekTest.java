@@ -51,7 +51,7 @@ public class ZlomekTest {
             } catch (Exception e) {
                 wrongGuesses--;
                 System.out.printf("Neplatny vstup %d/5\n", wrongGuesses);
-                sc.next();
+                sc.reset();
             }
 
         }

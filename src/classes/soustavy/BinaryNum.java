@@ -1,11 +1,17 @@
 package classes.soustavy;
 
+
 public class BinaryNum {
     private Node tail;
 
     private class Node{
         protected boolean value;
         protected Node next;
+
+        /**
+         *
+         * @param value 1 or 0 stored in boolean form
+         */
         public  Node(boolean value){
             this.value=value;
             next = null;
@@ -39,13 +45,7 @@ public class BinaryNum {
             value/=2;
         }
     }
-    public void add(boolean value){
-        Node temp = tail;
-        while (temp.next!=null){
-            temp = temp.next;
-        }
-        temp.setNext(new Node(value));
-    }
+
 
     @Override
     public String toString(){
@@ -57,16 +57,17 @@ public class BinaryNum {
         }while(temp!=null);
         return output;
     }
-
-    public static void main(String[] args) {
-        BinaryNum bn= new BinaryNum(true);
-        System.out.println(bn.toString());
-        bn.add(true);
-        bn.add(false);
-        bn.add(true);
-        System.out.println(bn.toString());
-        BinaryNum bn2 = new BinaryNum((byte) 64);
-        System.out.print(bn2);
+    public int toInt(){
+        int output = 0;
+        Node temp = tail;
+        int i = 0;
+        do {
+            output+=temp.value?Math.pow(2,i):0;
+            temp=temp.next;
+            i++;
+        }while(temp!=null);
+        return output;
     }
+
 
 }

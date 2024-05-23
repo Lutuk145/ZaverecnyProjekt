@@ -1,8 +1,9 @@
 import classes.celaCisla.CelaCislaTest;
+import classes.zlomky.ZlomekTest;
 
 public class Main {
     public static void main(String[] args) {
-        CelaCislaTest celaCislaTest = new CelaCislaTest(5,1);
-        celaCislaTest.test();
+        ZlomekTest zt = new ZlomekTest(5,1);
+        zt.test();
     }
 }
