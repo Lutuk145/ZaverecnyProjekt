@@ -1,18 +1,14 @@
 package classes.soustavy;
 
-public class HexNum {
+public class HexNum{
 
-    private Node tail;    private final byte A = 10;
-    private final byte B = 11;
-    private final byte C = 12;
-    private final byte D = 13;
-    private final byte E = 14;
-    private final byte F = 15;
+    private Node tail;
 
     public HexNum(int value){
         int nextVal = setTail(value);
         setValue(nextVal);
     }
+
     private class Node {
         protected int value;
         protected Node next;
@@ -31,7 +27,7 @@ public class HexNum {
         }
         public String toString(){
             String output = "";
-            if (value<9){
+            if (value<=9){
                 output+=value;
             }else {
                 switch (value){
@@ -41,23 +37,15 @@ public class HexNum {
                     case 13->output+="D";
                     case 14->output+="E";
                     case 15->output+="F";
-                    default -> throw new RuntimeException("Couldnt load num");
+                    default -> {
+                        throw new RuntimeException("Couldnt load num");
+                    }
                 }
             }
             return output;
         }
     }
-    public int toInt(){
-        int output = 0;
-        int i = 0;
-        Node temp = tail;
-         do {
-             output+=Math.pow(16,i)*temp.value;
-             temp=temp.next;
-             i++;
-         }while(temp!=null);
-         return output;
-    }
+
     public void setValue(int value){
         Node temp = tail;
         while (value>0) {

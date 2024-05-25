@@ -22,23 +22,8 @@ public class Zlomek {
             this.jmenovatel*=-1;
             this.citatel*=-1;
         }
-        if (this.citatel>=0) {
-            for (int i = this.citatel; i >= 2; i--) {
-                if ((this.citatel % i) == 0 && (this.jmenovatel % i) == 0) {
-                    this.citatel /= i;
-                    this.jmenovatel /= i;
-                    break;
-                }
-            }
-        }else {
-            for (int i = -this.citatel; i >=2; i--) {
-                if ((this.citatel % i) == 0 && (this.jmenovatel % i) == 0) {
-                    this.citatel /= i;
-                    this.jmenovatel /= i;
-                    break;
-                }
-            }
-        }
+
+
     }
     public Zlomek(double decimal){
         if (Math.log10(decimal)>=0){
@@ -60,11 +45,6 @@ public class Zlomek {
         return citatel;
     }
 
-    public void setCitatel(int citatel) {
-        this.citatel = citatel;
-        format();
-    }
-
     public int getJmenovatel() {
         return jmenovatel;
     }
@@ -72,9 +52,6 @@ public class Zlomek {
     public void setJmenovatel(int jmenovatel) {
         this.jmenovatel = jmenovatel;
         format();
-    }
-    public double asDecimal(){
-        return (double)citatel / jmenovatel;
     }
     public String toString() {
         return citatel + "/" + jmenovatel;

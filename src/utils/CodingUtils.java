@@ -1,5 +1,6 @@
 package utils;
 
+import classes.soustavy.SoustavyPriklad;
 import classes.zlomky.Zlomek;
 import classes.celaCisla.CelaCislaPriklad;
 import classes.zlomky.ZlomekPriklad;
@@ -7,7 +8,16 @@ import classes.zlomky.ZlomekPriklad;
 import java.util.Random;
 
 public class CodingUtils {
+    /**
+     * @implNote wrong Guess is left number of attempts
+     */
     public static int wrongGuesses = 5;
+
+    /**
+     *
+     * @param dif diffilcuty of the priklad
+     * @return returns random zlomek priklad
+     */
     public static ZlomekPriklad genZlomekPriklad(int dif){
             Random rand = new Random();
             String znaminko = "";
@@ -38,6 +48,11 @@ public class CodingUtils {
             return new ZlomekPriklad(z1,z2,znaminko);
     }
 
+    /**
+     *
+     * @param difficulty diffilcuty of the priklad
+     * @return returns random whole priklad
+     */
     public static CelaCislaPriklad genCelyPriklad(int difficulty) {
         Random rand = new Random();
         int num1 = 0;
@@ -96,5 +111,20 @@ public class CodingUtils {
             case 4 -> znaminko = "/";
         }
         return new CelaCislaPriklad(num1,num2,znaminko);
+    }
+
+    /**
+     *
+     * @return returns random soustava priklad
+     */
+    public static SoustavyPriklad genSoustavyPriklad(){
+        Random rand = new Random();
+        int value = rand.nextInt(100_000)+1;
+        int beginingValue= rand.nextInt(3);
+        int convertValue;
+        do{
+            convertValue = rand.nextInt(3);
+        }while (beginingValue==convertValue);
+        return new SoustavyPriklad(value,beginingValue,convertValue);
     }
 }

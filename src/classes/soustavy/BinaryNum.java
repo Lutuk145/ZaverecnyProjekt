@@ -1,31 +1,19 @@
 package classes.soustavy;
 
 
-public class BinaryNum {
+public class BinaryNum{
     private Node tail;
 
     private class Node{
         protected boolean value;
         protected Node next;
-
-        /**
-         *
-         * @param value 1 or 0 stored in boolean form
-         */
         public  Node(boolean value){
             this.value=value;
             next = null;
         }
-        public void setNext(Node next){
-            this.next = next;
-        }
     }
 
-    public BinaryNum(boolean value){
-        tail = new Node(value);
-    }
-
-    public BinaryNum(byte value){
+    public BinaryNum(int value){
         if (value%2==1){
             tail = new Node(true);
         }else {
@@ -57,17 +45,4 @@ public class BinaryNum {
         }while(temp!=null);
         return output;
     }
-    public int toInt(){
-        int output = 0;
-        Node temp = tail;
-        int i = 0;
-        do {
-            output+=temp.value?Math.pow(2,i):0;
-            temp=temp.next;
-            i++;
-        }while(temp!=null);
-        return output;
-    }
-
-
 }

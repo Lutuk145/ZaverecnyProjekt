@@ -33,18 +33,6 @@ public class ZlomekPriklad {
             }
         }
     }
-
-    public Zlomek getZ1() {
-        return z1;
-    }
-
-    public Zlomek getZ2() {
-        return z2;
-    }
-
-    public String getZnaminko() {
-        return znaminko;
-    }
     @Override
     public String toString(){
         return String.format("%s %s %s =",z1,znaminko,z2);

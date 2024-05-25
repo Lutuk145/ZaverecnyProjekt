@@ -31,27 +31,30 @@ public class CelaCislaTest {
         CelaCislaPriklad[] priklady = genPriklady();
 
         for (CelaCislaPriklad priklad : priklady) {
-            if (wrongGuesses <= 0) {
-                System.out.println("Zadal jsi 5 neplatnych odpovedi, test ukoncen");
-                System.exit(0);
-            }
-            System.out.println(priklad);
-            System.out.print(">>> ");
-            Scanner scanner = new Scanner(System.in);
-            try {
-                int vysledek = scanner.nextInt();
-                spravne += priklad.getVysledek() == vysledek ? 1 : 0;
-            } catch (InputMismatchException e) {
-                wrongGuesses--;
-                System.out.printf("Neplatny vstup %d/5\n", wrongGuesses);
-                scanner.next();
-            }
+            boolean run = true;
+
+            do {
+                if (wrongGuesses <= 0) {
+                    System.out.println("Zadal jsi 5 neplatnych odpovedi, test ukoncen");
+                    System.exit(0);
+                }
+                System.out.println(priklad);
+                System.out.print(">>> ");
+                Scanner scanner = new Scanner(System.in);
+                try {
+                    int vysledek = scanner.nextInt();
+                    spravne += priklad.getVysledek() == vysledek ? 1 : 0;
+                    run= false;
+                } catch (InputMismatchException e) {
+                    wrongGuesses--;
+                    System.out.printf("Neplatny vstup %d/5\n", wrongGuesses);
+                    scanner.next();
+                }
+
+            }while (run);
+
 
         }
-
-
         System.out.println("Mas " + spravne + "/" + pocet + " spravnych odpovedi");
-
     }
-
 }
