@@ -2,7 +2,11 @@ import classes.celaCisla.CelaCislaTest;
 import classes.soustavy.SoustavyTest;
 import classes.zlomky.ZlomekTest;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import static utils.CodingUtils.*;
@@ -21,11 +25,18 @@ public class UserInterface {
      * @implNote Runs the whole program
      */
     public void run(){
-        System.out.println("Vytej v projektu na testovani tvych matematickych schopnosti.\nInfo pro zacatek:\n\t1. Mate maximalne 5 neplatnych odpovedi, pote se program vypne.\n\t2. Desetina cisla ze zapisuji jako a,b\n\t3. Cela cisla povazuji desetinacisla jako neplatny vstup");
+        System.out.println(getReadMe());
         do {
+            sc.reset();
             System.out.println("Co byste chteli delat:\n\t1. Otestovat cela cisla\n\t2. Otestovat zlomky\n\t3. Otestovat prevody mezi soustavami\n\t4. Ukoncit program");
             System.out.print(">>> ");
+
             int choice = checkChoice(1,4);
+            if (choice==-1){
+                sc = new Scanner(System.in);
+                continue;
+
+            }
             switch (choice){
                 case 1->testCelaCisla();
                 case 2->testZlomky();
@@ -33,7 +44,7 @@ public class UserInterface {
                 case 4->konec=true;
             }
 
-        }while (!konec);
+        }while (!konec&&wrongGuesses>0);
     }
 
     /**
@@ -73,7 +84,7 @@ public class UserInterface {
     }
 
     /**
-     * @implNote sets up the test for soustavu
+     * @implNote sets up the test for "soustavy"
      */
     private void testSoustavy(){
         System.out.println("Zadejte pocet prikladu:");
@@ -102,12 +113,28 @@ public class UserInterface {
                 return -1;
             }
             return choice;
-        }catch (InputMismatchException e){
+        }catch (NoSuchElementException e){
             wrongGuesses--;
             System.out.printf("Neplatny vstup %d/5\n", wrongGuesses);
-            sc.close();
-            sc = new Scanner(System.in);
+            sc.reset();
+            return -1;
         }
-        return -1;
+    }
+
+    /**
+     *
+     * @return text from READ.ME file which has user documentation
+     */
+    private String getReadMe(){
+        String output = "";
+        try(BufferedReader br = new BufferedReader(new FileReader("src/READ.ME"))){
+            String line;
+            while ((line=br.readLine())!=null){
+                output+=line+"\n";
+            }
+        }catch (IOException e){
+            System.out.println("FILE COULDNT BE READ");
+        }
+        return output;
     }
 }

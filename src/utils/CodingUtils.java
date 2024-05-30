@@ -14,9 +14,9 @@ public class CodingUtils {
     public static int wrongGuesses = 5;
 
     /**
-     *
-     * @param dif diffilcuty of the priklad
-     * @return returns random zlomek priklad
+     * @implNote generates random fraction equation
+     * @param dif difficulty of the equation (1 = -10 - 10 2 = -100 - 100 3 = -1000 - 1000)
+     * @return returns random fraction equation
      */
     public static ZlomekPriklad genZlomekPriklad(int dif){
             Random rand = new Random();
@@ -49,9 +49,9 @@ public class CodingUtils {
     }
 
     /**
-     *
-     * @param difficulty diffilcuty of the priklad
-     * @return returns random whole priklad
+     * @implNote generates random whole number equation
+     * @param difficulty difficulty of the equation 1 = -10 - 10 2 = -100 - 100 3 = -1000 - 1000
+     * @return returns a random whole number equation
      */
     public static CelaCislaPriklad genCelyPriklad(int difficulty) {
         Random rand = new Random();
@@ -114,7 +114,7 @@ public class CodingUtils {
     }
 
     /**
-     *
+     * @implNote
      * @return returns random soustava priklad
      */
     public static SoustavyPriklad genSoustavyPriklad(){

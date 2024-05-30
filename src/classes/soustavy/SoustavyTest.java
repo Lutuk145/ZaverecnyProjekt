@@ -6,22 +6,44 @@ import java.util.Scanner;
 import static utils.CodingUtils.genSoustavyPriklad;
 import static utils.CodingUtils.wrongGuesses;
 
+/**
+ * Represents a test for solving systems of equations .
+ * The test generates a set of system of equations problems (SoustavyPriklad instances)
+ * and prompts the user to solve them.
+ */
 public class SoustavyTest {
-    private int pocet;
-    public SoustavyTest(int pocet){
-        this.pocet=pocet;
+    private int pocet; // Number of problems to generate
+
+    /**
+     * Constructs a new SoustavyTest instance.
+     *
+     * @param pocet Number of problems to generate
+     */
+    public SoustavyTest(int pocet) {
+        this.pocet = pocet;
     }
-    private SoustavyPriklad[] genPriklady(){
-        SoustavyPriklad[] sp = new SoustavyPriklad[pocet];
-        for (int i = 0; i<pocet;i++){
-            sp[i]=genSoustavyPriklad();
+
+    /**
+     * Generates an array of system of equations problems (SoustavyPriklad instances).
+     *
+     * @return An array of SoustavyPriklad instances
+     */
+    private SoustavyPriklad[] genPriklady() {
+        SoustavyPriklad[] priklady = new SoustavyPriklad[pocet];
+        for (int i = 0; i < pocet; i++) {
+            priklady[i] = genSoustavyPriklad();
         }
-        return sp;
+        return priklady;
     }
-    public void test(){
-        int spravne = 0;
+
+    /**
+     * Runs the system of equations test.
+     * Prompts the user to solve each generated problem and keeps track of correct answers.
+     */
+    public void test() {
+        int spravne = 0; // Counter for correct answers
         SoustavyPriklad[] priklady = genPriklady();
-        for (SoustavyPriklad priklad :priklady){
+        for (SoustavyPriklad priklad : priklady) {
             boolean run = true;
             do {
                 if (wrongGuesses <= 0) {
@@ -33,16 +55,16 @@ public class SoustavyTest {
                 Scanner scanner = new Scanner(System.in);
                 try {
                     String vysledek = scanner.nextLine();
-                    spravne+= Integer.parseInt(vysledek,priklad.getOutputSoustava())==priklad.getValue()?1:0;
+                    spravne += Integer.parseInt(vysledek, priklad.getOutputSoustava()) == priklad.getValue() ? 1 : 0;
                     run = false;
                 } catch (InputMismatchException | NumberFormatException e) {
                     wrongGuesses--;
                     System.out.printf("Neplatny vstup %d/5\n", wrongGuesses);
                     scanner.reset();
                 }
-            }while(run);
-
+            } while (run);
         }
         System.out.println("Mas " + spravne + "/" + pocet + " spravnych odpovedi");
     }
 }
+
